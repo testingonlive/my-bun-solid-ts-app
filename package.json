@@ -1,0 +1,28 @@
+{
+  "name": "my-bun-solid-ts-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "dependencies": {
+    "embla-carousel-autoplay": "^8.0.2",
+    "embla-carousel-solid": "^8.0.2",
+    "solid-element": "^1.8.0",
+    "solid-js": "^1.8.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "eslint": "^8",
+    "eslint-plugin-solid": "^0.13.2",
+    "globals": "^15.0.0",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^7.7.0",
+    "vite": "^5.2.0",
+    "vite-plugin-solid": "^2.10.2"
+  }
+}
