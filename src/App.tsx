@@ -1,6 +1,14 @@
-import { createResource, createSignal } from "solid-js";
+import { createResource, createSignal, Index } from "solid-js";
 
 import { Button } from "~/components/ui/button";
+import { Card, CardContent } from "~/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
 
 import algoliaFetch from "./algoliaFetch";
 
@@ -35,6 +43,35 @@ function App(props: AppProps) {
           </pre>
         )}
       </div>
+
+      {algoliaRes.loading ? (
+        <span>loading...</span>
+      ) : (
+        <Carousel
+          opts={{
+            align: "start",
+          }}
+          class="w-full max-w-sm"
+        >
+          <CarouselContent>
+            <Index each={algoliaRes()?.content._rawResults[0].hits}>
+              {(hit) => (
+                <CarouselItem class="md:basis-1/2 lg:basis-1/3">
+                  <div class="p-1">
+                    <Card>
+                      <CardContent class="flex aspect-square items-center justify-center p-6">
+                        <span class="text-3xl font-semibold">{hit.name}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              )}
+            </Index>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      )}
     </>
   );
 }

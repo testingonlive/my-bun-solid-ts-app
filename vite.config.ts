@@ -1,5 +1,4 @@
 import path from "path"
- 
 import solid from 'vite-plugin-solid';
 import { defineConfig } from "vite"
  
@@ -9,5 +8,8 @@ export default defineConfig({
     alias: {
       "~": path.resolve(__dirname, "./src")
     }
+  },
+  build:{
+    sourcemap: true
   }
 })
