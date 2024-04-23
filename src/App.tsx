@@ -1,9 +1,8 @@
-import { createSignal } from "solid-js";
-import solidLogo from "./assets/solid.svg";
-import viteLogo from "/vite.svg";
-import AppCSS from "./App.css?inline";
+import { createResource, createSignal } from "solid-js";
 
-import EmblaCarousel from "./EmblaCarousel";
+import { Button } from "~/components/ui/button";
+
+import algoliaFetch from "./algoliaFetch";
 
 type AppProps = {
   appName: string;
@@ -11,32 +10,31 @@ type AppProps = {
 
 function App(props: AppProps) {
   const [count, setCount] = createSignal(0);
+  const [algoliaRes] = createResource(() => props.appName, algoliaFetch);
 
   return (
     <>
-      <style>{AppCSS}</style>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
       <h1>Vite + Solid</h1>
       <h2>{props.appName}</h2>
       <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button
+          onClick={() => setCount((count) => count + 1)}
+          variant="outline"
+        >
           count is {count()}!!!
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <EmblaCarousel />
+        </Button>
+        {algoliaRes.loading ? (
+          <span>loading...</span>
+        ) : (
+          <pre>
+            {JSON.stringify(
+              algoliaRes()?.content._rawResults[0].hits.map((hit) => hit.name),
+              null,
+              2
+            )}
+          </pre>
+        )}
       </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
     </>
   );
 }

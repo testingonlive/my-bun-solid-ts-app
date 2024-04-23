@@ -10,16 +10,27 @@
     "lint": "eslint --ext .ts,.tsx ."
   },
   "dependencies": {
+    "@kobalte/core": "^0.12.6",
+    "algoliasearch": "^4.23.3",
+    "algoliasearch-helper": "^3.18.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.0.2",
     "embla-carousel-solid": "^8.0.2",
     "solid-element": "^1.8.0",
-    "solid-js": "^1.8.15"
+    "solid-js": "^1.8.15",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
+    "@types/node": "^20.12.7",
+    "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-plugin-solid": "^0.13.2",
     "globals": "^15.0.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.7.0",
     "vite": "^5.2.0",
