@@ -7,7 +7,7 @@ type AlgoliaResponse = {
     name: string;
 }
 
-const algoliaFetch = (query: number) => {
+const algoliaFetch = (query: string) => {
     return index.search<AlgoliaResponse>(query)
 }
 

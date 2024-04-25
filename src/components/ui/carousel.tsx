@@ -244,7 +244,7 @@ const CarouselNext: Component<CarouselButtonProps> = (rawProps) => {
 
   return (
     <Button
-      variant={123}
+      variant={props.variant}
       size={props.size}
       class={cn(
         "absolute size-8 rounded-full touch-manipulation",
