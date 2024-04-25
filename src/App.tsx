@@ -36,7 +36,7 @@ function App(props: AppProps) {
         ) : (
           <pre>
             {JSON.stringify(
-              algoliaRes()?.content._rawResults[0].hits.map((hit) => hit.name),
+              algoliaRes()?.hits.map((hit) => hit.name),
               null,
               2
             )}
@@ -54,7 +54,7 @@ function App(props: AppProps) {
           class="w-full max-w-sm"
         >
           <CarouselContent>
-            <Index each={algoliaRes()?.content._rawResults[0].hits}>
+            <Index each={algoliaRes()?.hits}>
               {(hit) => (
                 <CarouselItem class="md:basis-1/2 lg:basis-1/3">
                   <div class="p-1">

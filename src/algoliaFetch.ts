@@ -1,11 +1,14 @@
-import algoliasearch from 'algoliasearch';
-import algoliasearchHelper from 'algoliasearch-helper';
+import algoliasearch from 'algoliasearch/lite';
 
 const client = algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76');
-const helper = algoliasearchHelper(client, 'instant_search');
+const index = client.initIndex('instant_search');
+
+type AlgoliaResponse = {
+    name: string;
+}
 
 const algoliaFetch = (query: string) => {
-    return helper.searchOnce({query})
+    return index.search<AlgoliaResponse>(query)
 }
 
 export default algoliaFetch;
