@@ -19,6 +19,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Download TypeScript error count
+        uses: actions/download-artifact@v2
+        with:
+          name: ts-error-count
+          path: ./.github/
+
       - name: Check TypeScript errors
         run: |
           ERROR_COUNT=$(npx tsc --noEmit | grep -P "^\S+\.tsx?\(\d+,\d+\):" | wc -l)
@@ -28,13 +34,10 @@ jobs:
             exit 1
           elif (( $ERROR_COUNT < $STORED_ERROR_COUNT )); then
             echo $ERROR_COUNT > ./.github/ts-error-count
-            git config --global user.name 'GitHub Actions'
-            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-            git add ./.github/ts-error-count
-            git commit -m "Update TypeScript error count"
-            if [[ -n "${{ github.head_ref }}" ]]; then
-              git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.head_ref }}
-            else
-              git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
-            fi
           fi
+
+      - name: Upload TypeScript error count
+        uses: actions/upload-artifact@v2
+        with:
+          name: ts-error-count
+          path: ./.github/ts-error-count
