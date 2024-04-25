@@ -24,6 +24,11 @@ jobs:
           if (( $ERROR_COUNT > $STORED_ERROR_COUNT )); then
             echo "TypeScript error count has increased!"
             exit 1
-          else
+          elif (( $ERROR_COUNT < $STORED_ERROR_COUNT )); then
             echo $ERROR_COUNT > ./.github/ts-error-count
+            git config --global user.name 'GitHub Actions'
+            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+            git add ./.github/ts-error-count
+            git commit -m "Update TypeScript error count"
+            git push
           fi
