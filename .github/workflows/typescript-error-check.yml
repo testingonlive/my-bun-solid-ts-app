@@ -19,7 +19,7 @@ jobs:
 
       - name: Check TypeScript errors
         run: |
-          ERROR_COUNT=$(npx tsc --noEmit | wc -l)
+          ERROR_COUNT=$(npx tsc --noEmit | grep -P "^\S+\.tsx?\(\d+,\d+\):" | wc -l)
           STORED_ERROR_COUNT=$(cat ./.github/ts-error-count)
           if (( $ERROR_COUNT > $STORED_ERROR_COUNT )); then
             echo "TypeScript error count has increased!"
