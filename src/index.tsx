@@ -1,13 +1,13 @@
 /* @refresh reload */
 import { customElement } from "solid-element";
 
-import IndexCSS from "./index.css?inline";
 import App from "./App";
+import Css from "./Css";
 
 customElement("my-app", { appName: "" }, (props) => {
   return (
     <>
-      <style>{IndexCSS}</style>
+      <Css />
       <App appName={props.appName} />
     </>
   );

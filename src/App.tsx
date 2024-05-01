@@ -1,4 +1,4 @@
-import { createResource, createSignal, Index } from "solid-js";
+import { createResource, createSignal, Index, Show, For } from "solid-js";
 
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
@@ -27,13 +27,11 @@ function App(props: AppProps) {
       <div class="card">
         <Button
           onClick={() => setCount((count) => count + 1)}
-          variant="outline"
+          variant="destructive"
         >
-          count is {count()}!!!
+          count is {count()}!!
         </Button>
-        {algoliaRes.loading ? (
-          <span>loading...</span>
-        ) : (
+        <Show when={!algoliaRes.loading} fallback={<span>loading...</span>}>
           <pre>
             {JSON.stringify(
               algoliaRes()?.hits.map((hit) => hit.name),
@@ -41,12 +39,10 @@ function App(props: AppProps) {
               2
             )}
           </pre>
-        )}
+        </Show>
       </div>
 
-      {algoliaRes.loading ? (
-        <span>loading...</span>
-      ) : (
+      <Show when={!algoliaRes.loading} fallback={<span>loading...</span>}>
         <Carousel
           opts={{
             align: "start",
@@ -54,7 +50,7 @@ function App(props: AppProps) {
           class="w-full max-w-sm"
         >
           <CarouselContent>
-            <Index each={algoliaRes()?.hits}>
+            <For each={algoliaRes()?.hits}>
               {(hit) => (
                 <CarouselItem class="md:basis-1/2 lg:basis-1/3">
                   <div class="p-1">
@@ -66,12 +62,12 @@ function App(props: AppProps) {
                   </div>
                 </CarouselItem>
               )}
-            </Index>
+            </For>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      )}
+      </Show>
     </>
   );
 }
