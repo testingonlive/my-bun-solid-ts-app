@@ -1,4 +1,4 @@
-import { createResource, createSignal, Index, Show, For } from "solid-js";
+import { createResource, createSignal, Show, For } from "solid-js";
 
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
